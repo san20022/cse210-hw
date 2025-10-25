@@ -36,10 +36,10 @@ class Program
 
                 Entry entry = new Entry
                 {
-                    Date = DateTime.Now.ToString(),
-                    Prompt = prompt,
-                    Response = response,
-                    Mood = mood
+                    _Date = DateTime.Now.ToString(),
+                    _Prompt = prompt,
+                    _Response = response,
+                    _Mood = mood
                 };
 
                 journal.AddEntry(entry);
