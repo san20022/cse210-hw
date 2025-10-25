@@ -2,22 +2,22 @@ using System;
 
 public class Entry
 {
-    public string Date { get; set; }
-    public string Prompt { get; set; }
-    public string Response { get; set; }
-    public string Mood { get; set; }
+    public string _Date;
+    public string _Prompt;
+    public string _Response;
+    public string _Mood;
 
     public void Display()
     {
-        Console.WriteLine($"{Date} - {Prompt}");
-        Console.WriteLine(Response);
-        Console.WriteLine($"Mood: {Mood}");
+        Console.WriteLine($"{_Date} - {_Prompt}");
+        Console.WriteLine(_Response);
+        Console.WriteLine($"Mood: {_Mood}");
         Console.WriteLine();
     }
 
     public override string ToString()
     {
-        return $"{Date}|{Prompt}|{Response}|{Mood}";
+        return $"{_Date}|{_Prompt}|{_Response}|{_Mood}";
     }
 
     public static Entry FromString(string line)
@@ -25,10 +25,10 @@ public class Entry
         string[] parts = line.Split('|');
         return new Entry
         {
-            Date = parts[0],
-            Prompt = parts[1],
-            Response = parts[2],
-            Mood = parts[3]
+            _Date = parts[0],
+            _Prompt = parts[1],
+            _Response = parts[2],
+            _Mood = parts[3]
         };
     }
 }
