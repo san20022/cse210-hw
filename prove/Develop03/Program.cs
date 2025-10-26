@@ -13,7 +13,22 @@ class Program
         {
             Console.Clear();
             Console.WriteLine(scripture.GetDisplayText());
-            Console.WriteLine(""
+            Console.WriteLine("\nPress Enter to hide words, or type 'quit' to exit.");
+
+            String input = Console.ReadLine();
+
+            if (input.ToLower() == "quit")
+                break;
+
+            if (scripture.IsCompletelyHidden())
+            {
+                Console.Clear();
+                Console.WriteLine(scripture.GetDisplayText());
+                Console.WriteLine("\nAll words are hidden. Program ending.");
+                break;
+            }
+
+            scripture.HideRandomWords(3);
         }
     }
 }
