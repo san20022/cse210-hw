@@ -54,7 +54,7 @@ namespace MindfulnessProgram
             ShowCountDown(5);
 
             var items = GetListFromUser();
-            _count = items.count;
+            _count = items.Count;
 
             Console.WriteLine($"\nYou listed {_count} items);");
             foreach (var i in items)
