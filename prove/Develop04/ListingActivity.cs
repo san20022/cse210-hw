@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace MindfulnessProgram
 {
-    class ListeningActivity : Activity
+    class ListingActivity : Activity
     {
-        private int_count;
-        private List<string> _promts = new()
+        private int _count;
+        private List<string> _prompts = new()
         {
             "Who are people that you appreciate?",
             "What are your personal strenghts?",
@@ -18,14 +18,14 @@ namespace MindfulnessProgram
         private Random _rng = new();
 
         public ListingActivity()
-            : base("Listening Activiy",
+            : base("Listing Activity",
                    "This activity helps you reflect on the good things in your life by listing as many as you can.")
         {
         }
 
         private string GetRandomPromt()
         {
-            return _promts[_rng.Next(_prompts.Count)];
+            return _prompts[_rng.Next(_prompts.Count)];
         }
 
         private List<string> GetListFromUser()
