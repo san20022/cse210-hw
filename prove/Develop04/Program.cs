@@ -14,7 +14,7 @@ namespace MindfulnessProgram
                 Console.WriteLine("Mindfulness Program");
                 Console.WriteLine("-------------------");
                 Console.WriteLine("1) Breating Activity");
-                Console.WriteLine("2) Reflecting Acttivity");
+                Console.WriteLine("2) Reflecting Activity");
                 Console.WriteLine("3) Listing Activity");
                 Console.WriteLine("4) Exit");
                 Console.Write("\nChoose an option");
@@ -41,7 +41,8 @@ namespace MindfulnessProgram
                         break;
                 }
             }
-            Console.WriteLine("\ngoodbye! Stay Mindul.")
+
+            Console.WriteLine("\ngoodbye! Stay Mindul.");
             System.Threading.Thread.Sleep(1000);
 
         }

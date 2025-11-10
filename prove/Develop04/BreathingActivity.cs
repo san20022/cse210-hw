@@ -12,7 +12,7 @@ namespace MindfulnessProgram
 
         public override void Run()
         {
-            DispplayStartingMessage();
+            DisplayStartingMessage();
             DateTime end = DateTime.Now.AddSeconds(_duration);
             bool breathIn = true;
 
@@ -20,11 +20,11 @@ namespace MindfulnessProgram
             {
                 Console.WriteLine();
                 Console.Write(breathIn ? "Breathe in... " : " Breath out...");
-                ShowCountDown(breathIn ? 4 : 6):
+                ShowCountDown(breathIn ? 4 : 6);
                 breatheIn = !breatheIn;
             }
 
             DisplayEndingMessage();
-        }           
+        }
     }
 }

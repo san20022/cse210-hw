@@ -1,9 +1,9 @@
 using System;
-using System.Threading:
+using System.Threading;
 
 namespace MindfulnessProgram
 {
-    abtract class Activity
+    abstract class Activity
     {
         protected string _name;
         protected string _description;
@@ -12,23 +12,23 @@ namespace MindfulnessProgram
         public Activity(string name, string description)
         {
             _name = name;
-            _description =description;
+            _description = description;
         }
 
         public void DisplayStartingMessage()
         {
             Console.Clear();
-            Console.WriteLine($"--- {-name} ---\n")
-            Console.WriteLine(-description);
+            Console.WriteLine($"--- {_name} ---\n");
+            Console.WriteLine(_description);
             Console.Write("\nEnter durartion (in seconds): ");
 
             while (!int.TryParse(Console.ReadLine(), out _duration) || _duration <= 0)
             {
                 Console.Write("Please enter a valid positive number:");
-            }       
+            }
 
             Console.WriteLine("\nGet ready...");
-            ShowSpinner(3);     
+            ShowSpinner(3);
         }
 
         public void DisplayEndingMessage()
@@ -41,16 +41,16 @@ namespace MindfulnessProgram
 
         public void ShowSpinner(int seconds)
         {
-            char[] spinner = { '|', '/', '-', '\\'}:
+            char[] spinner = { '|', '/', '-', '\\' };
             DateTime end = DateTime.Now.AddSeconds(seconds);
             int i = 0;
 
-            while (DateTime.Now <end)
+            while (DateTime.Now < end)
             {
                 Console.Write(spinner[i]);
                 Thread.Sleep(200);
                 Console.Write("\b \b");
-                i = (i + 1) % spinner.length;
+                i = (i + 1) % spinner.Length;
             }
         }
 

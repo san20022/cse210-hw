@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 
-manespace MindfulnessProgram
+namespace MindfulnessProgram
 {
     class ListeningActivity : Activity
     {
-        private int_count.
+        private int_count;
         private List<string> _promts = new()
         {
             "Who are people that you appreciate?",
@@ -45,7 +45,7 @@ manespace MindfulnessProgram
 
             return list;
         }
-        
+
         public override void Run()
         {
             DisplayStartingMessage();
