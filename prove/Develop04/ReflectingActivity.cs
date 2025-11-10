@@ -35,6 +35,35 @@ namespace MindfulnessProgram
             return _promts[_rng.Next(_promts.Count)];
         }
 
-        
+        private string GetRandomQuestion()
+        {
+            return _questions[_rng.Next(_questions.Count)];
+        }
+
+        private void DisplayPromt()
+        {
+            Console.WriteLine($"\n{GetRandomPromt}")
+            Console.WriteLine("Press Enter when you're ready...");
+            Console.ReadLine();
+        }
+
+        private void DisplayQuestions()
+        {
+            DateTime end = DateTime.Now.AddSeconds(_duration);
+
+            while (DateTime.Now <end)
+            {
+                Console.WriteLine($"\n{GetRandomQuestion()}");
+                ShowSpinner(5);
+            }
+        }
+
+        public override void Run()
+        {
+            DisplayStartingMessage();
+            DisplayPromt();
+            DisplayQuestions();
+            DisplayEndingMessage();
+        }
     }
 }
