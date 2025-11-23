@@ -20,7 +20,7 @@ class Program
             Console.WriteLine("6. Load goals from file");
             Console.WriteLine("7. Demo: Add example goals");
             Console.WriteLine("0. Quit");
-            Console.WriteLine("Choise an option: ");
+            Console.WriteLine("Choose an option: ");
             var choice = Console.ReadLine()?.Trim();
 
             switch (choice)
@@ -38,7 +38,7 @@ class Program
                     gm.ShowScore();
                     break;
                 case "5":
-                    Console.Write("Enter file name to save (e.g., save.txt);");
+                    Console.Write("Enter file name to save (e.g., save.txt): ");
                     string savePath = Console.ReadLine().Trim();
                     gm.Save(savedPath);
                     break;
@@ -77,7 +77,7 @@ class Program
                 Console.Write("Points (integer): ");
                 int ptsS = ReadIntFromConsole(100);
                 gm.AddGoal(new SimpleGoal(nameS, descS, ptsS));
-                Console.Writeline("Simple goals created.");
+                Console.WriteLine("Simple goals created.");
                 break;
             case "2":
                 Console.Write("Name: ");
@@ -92,7 +92,7 @@ class Program
             case "3":
                 Console.Write("Name: ");
                 var nameC = Console.ReadLine();
-                Console.Write("Description");
+                Console.Write("Description: ");
                 var descC = Console.ReadLine();
                 Console.Write("Points per event (integer): ");
                 int ptsC = ReadIntFromConsole(10);
@@ -100,11 +100,11 @@ class Program
                 int target = ReadIntFromConsole(5);
                 Console.Write("Bonus at completion (integer): ");
                 int bonus = ReadIntFromConsole(50);
-                gm.AddGoal(new CheckListGoal(nameC, descC, ptsC, target, bonus));
+                gm.AddGoal(new ChecklistGoal(nameC, descC, ptsC, target, bonus));
                 Console.WriteLine("Checklist goal created.");
                 break;
             default:
-                Console.Writeline("Invalid type.");
+                Console.WriteLine("Invalid type.");
                 break;
         }
     }
@@ -120,7 +120,7 @@ class Program
     static int ReadIntFromConsole(int defaultVal)
     {
         string s = Console.ReadLine();
-        if (int.TryParsel(s, out int val)) return val;
+        if (int.TryParse(s, out int val)) return val;
         return defaultVal;
     }
 
