@@ -15,13 +15,13 @@ class Program
             Console.WriteLine("1. Create a new goal");
             Console.WriteLine("2. List goals");
             Console.WriteLine("3. Record event (complete a goal)");
-            Console.WriteLine("4. Show score & level")
+            Console.WriteLine("4. Show score & level");
             Console.WriteLine("5. Save goals to file");
             Console.WriteLine("6. Load goals from file");
             Console.WriteLine("7. Demo: Add example goals");
             Console.WriteLine("0. Quit");
             Console.WriteLine("Choise an option: ");
-            var choice = Console.ReadLine()/.Trim();
+            var choice = Console.ReadLine()?.Trim();
 
             switch (choice)
             {
@@ -66,7 +66,7 @@ class Program
     {
         GoalManager.PrintGoalTypes();
         Console.Write("Choose goal type 1-3): ");
-        string t = Console.ReadLine()?.Trime();
+        string t = Console.ReadLine()?.Trim();
         switch (t)
         {
             case "1":
@@ -80,8 +80,8 @@ class Program
                 Console.Writeline("Simple goals created.");
                 break;
             case "2":
-                Console.Write("Name:");
-                var nameE = Console.ReadLine);
+                Console.Write("Name: ");
+                var nameE = Console.ReadLine();
                 Console.Write("Description: ");
                 var descE = Console.ReadLine();
                 Console.Write("Points per event (intteger): ");
