@@ -6,7 +6,7 @@ public class ChecklistGoal : Goal
     private int _currentCount;
     private int _bonus;
 
-    public ChecklistGoal(string name, string description, int pointsPerEvent, int targetCount, int targetCount, int bonus)
+    public ChecklistGoal(string name, string description, int pointsPerEvent, int targetCount, int bonus)
         : base(name, description, pointsPerEvent)
     {
         _targetCount = Math.Max(1, targetCount);
@@ -18,7 +18,7 @@ public class ChecklistGoal : Goal
     {
         if (IsComplete())
         {
-            Console.WriteLine("Checklist already completed. No further points unitl reset.");
+            Console.WriteLine("Checklist already completed. No further points until reset.");
             return 0;
         }
 
@@ -37,13 +37,13 @@ public class ChecklistGoal : Goal
 
     public override string GetDetailsString()
     {
-        string status = IsCompleted() ? "[X]" : "[ ]";
+        string status = IsComplete() ? "[X]" : "[ ]";
         return $"{status} {Name} ({Description}) - Completed {_currentCount}/{_targetCount} - {PointsPerEvent} pts each, { _bonus } bonus at completion";
     }
 
     public override string ToSaveString()
     {
-        return $"Checklist|{Escape(Name)}|{Escape(Description)}|{PointsPerEvent}|{_currentCont}|{_targetCount}|{_bonus}";
+        return $"Checklist|{Escape(Name)}|{Escape(Description)}|{PointsPerEvent}|{_currentCount}|{_targetCount}|{_bonus}";
     }
     public static ChecklistGoal FromSaved(string name, string desc, int points, int current, int target, int bonus)
     {
@@ -52,5 +52,5 @@ public class ChecklistGoal : Goal
         return g;
     }
 
-    private static string Escape(string s) => s.Replace("|", ";");
+    private static string Escape(string s) => s.Replace("|", "¦");
 }
