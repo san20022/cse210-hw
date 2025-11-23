@@ -127,6 +127,8 @@ class Program
     static void AddDemoGoals(GoalManager gm)
     {
         gm.AddGoal(new SimpleGoal("Run a marathon", "Finish a full marathon", 1000));
-        
+        gm.AddGoal(new EternalGoal("Daily Scripture Study", "Read scriptures daily", 100));
+        gm.AddGoal(new ChecklistGoal("Temple Visits", "Attend the temple", 50, 10, 500));
+        Console.WriteLine("Demo goals added.");
     }
 }
