@@ -46,5 +46,11 @@ public class ChecklistGoal : Goal
         return $"Checklist|{Escape(Name)}|{Escape(Description)}|{PointsPerEvent}|{_currentCont}|{_targetCount}|{_bonus}";
     }
     public static ChecklistGoal FromSaved(string name, string desc, int points, int current, int target, int bonus)
-    
+    {
+        var g = new ChecklistGoal(name, desc, points, target, bonus);
+        g._currentCount = Math.Max(0, Math.Min(current, target));
+        return g;
+    }
+
+    private static string Escape(string s) => s.Replace("|", ";");
 }
