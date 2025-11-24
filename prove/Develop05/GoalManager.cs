@@ -180,10 +180,18 @@ public class GoalManager
                 if (_score >= kv.key && !_badges.Contains(kv.Value))
                 {
                     _badges.Add(kv.Value);
-                    Console.WriteLine(($Badge earned: {kv.Vaule } (for reaching {kv.Key} points)))
+                    Console.WriteLine($"Badge earned: {kv.Vaule } (for reaching {kv.Key} points)!");
                 }
             }
         }
 
+
+        public static void PrintGoalTypes()
+        {
+            Console.WriteLine("Types:");
+            Console.WriteLine("1.Simple Goal - Complete once, get points once.")
+            Console.WriteLine("2. Eternal Goal - Repeatable, get points each time.")
+            Console.WriteLine("3. Checklist Goal Finish N times and get a bonus on completion.");
+        }
 
     }
