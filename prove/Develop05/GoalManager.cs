@@ -60,5 +60,106 @@ public class GoalManager
         }
 
 
-        
+        public void Save(string path)
+        {
+            using var writer = new StreamWriter(path);
+
+            writer.WriteLine(_score);
+
+            write.WriteLine(string.Join(",", _badges));
+
+            foreach (var g in _goals)
+            {
+                write.WriteLine(g.ToSaveString());
+            }
+            Console.WriteLine($"Saved { _goals.Count } goals to {path} (score {_score}).");
+        }
+
+
+        public void Load(string path)
+        {
+            if (!File.Exists(path))
+            {
+                Console.WriteLine("Save file not found.");
+                return;
+            }
+
+            var loadedGoals = new List<Goal>();
+            int loadedScore = 0;
+            var loadedBadges = new HashSet<string>();
+
+            var lines = File.ReadAllLines(path);
+            if (lines.Length >= 1)
+            {
+
+                int.TryParse(lines[0], out loadedScore);
+            }
+            if (lines.Length >= 2)
+            {
+                var badgeLine = lines [1];
+                if (!string.IsNullOrWhiteSpace(badgeLine))
+                {
+                    var badges = badgeLine.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                    foreach (var b in badges) loadedBadges.Add(b.Trim());
+                }
+            }
+
+            for (int i = 2; i < lines.Length; i++)
+            {
+                string line = lines[i];
+                if (string.IsNullOrWhiteSpace(line)) continue;
+                var parts = line.Split('|');
+                string type = parts [0];
+                try
+                {
+                    if (type == "Simple")
+                    {
+
+                        string name = Unescape(oarts[1]);
+                        string desc = Unescape(parts[2]);
+                        int pts = int.Parse(parts[3]);
+                        bool complete = bool.Parse(parts[4]);
+                        var g = new SimpleGoal(name, desc, pts);
+
+                        if (complete)
+                        {
+                            g.RecordEvent();
+                        }
+                        loadedGoals.Add(g);
+                    }
+                    else if (type == "Eternal")
+                    {
+
+                        string name = Unescape(parts[1]);
+                        string desc = Unescape(parts[2]);
+                        int pts = int.Parse(parts[3]);
+                        loadedGoals.Add(new EternalGoal(name, desc, pts));
+                    }
+                    else if (type == "Checklist")
+                    {
+
+                        string name = Unescape(parts[1]);
+                        string desc = Unescape(parts[2]);
+                        int pts = int.Parse(parts[3]);
+                        int current = int.Parse(parts[4]);
+                        int target = int.Parse(part[5]);
+                        int bonus = int.Parse(parts[6]);
+                        loadedGoals.Add(ChecklistGoal.FromSaved(name, desc, pts, current, target, bonus));
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Unknow goal type in save: {type}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Failed to parse line: {line} ({ex.Message})");
+                }
+            }
+            
+            _goals = loadedGoals;
+            _score = loadedScore;
+            _badges = loadedBadges;
+            Console.WriteLine($"Loaded { _goals.Count } goals.Score: {_score}. Badges: {string.Join(",", _badges)}");
+        }
     }
