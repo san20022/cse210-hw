@@ -5,7 +5,7 @@ public class SimpleGoal : Goal
     {
         private bool _isComplete = false;
 
-        public SimpleGoal(string name, string descriptiion, int points)
+        public SimpleGoal(string name, string description, int points)
             : base(name, description, points)
         {
 
@@ -15,7 +15,7 @@ public class SimpleGoal : Goal
         {
             if (_isComplete)
             {
-                Console.WriteLine("This goal is already complete. No points awared.");
+                Console.WriteLine("This goal is already complete. No points awarded.");
                 return 0;
             }
             _isComplete = true;
