@@ -1,5 +1,5 @@
 using System;
-public class EternalGoal : EternalGoal
+public class EternalGoal : Goal
 {
     public EternalGoal(string name, string description, int points)
         : base(name, description, points)
@@ -15,7 +15,7 @@ public class EternalGoal : EternalGoal
 
     public override string GetDetailsString()
     {
-        return $"[∞]" {Name} ({Description}) - {PointsPerEvent} pts each time";
+        return $"[∞] {Name} ({Description}) - {PointsPerEvent} pts each time";
     }
 
     public override string ToSaveString()
