@@ -21,7 +21,7 @@ public class GoalManager
                 return;
             }
 
-            for (int i = 0; i < _goals.Count i++)
+            for (int i = 0; i < _goals.Count; i++)
             {
                 Console.WriteLine($"{i + 1}. {_goals[i].GetDetailsString()}");
             }
@@ -45,17 +45,17 @@ public class GoalManager
                 return;
             }
 
-            var goal = _goal[goalIndex - 1];
+            var goal = _goals[goalIndex - 1];
             int gained = goal.RecordEvent();
             if (gained > 0)
             {
                 _score += gained;
-                Console.WriteLine($"You gained {gainded} points! New score: {_score}");
+                Console.WriteLine($"You gained {gained} points! New score: {_score}");
                 CheckForBadges();
             }
             else
             {
-                Console.WriteLine("No points gainded from that event.");
+                Console.WriteLine("No points gained from that event.");
             }
         }
 
@@ -66,11 +66,11 @@ public class GoalManager
 
             writer.WriteLine(_score);
 
-            write.WriteLine(string.Join(",", _badges));
+            writer.WriteLine(string.Join(",", _badges));
 
             foreach (var g in _goals)
             {
-                write.WriteLine(g.ToSaveString());
+                writer.WriteLine(g.ToSaveString());
             }
             Console.WriteLine($"Saved { _goals.Count } goals to {path} (score {_score}).");
         }
@@ -115,7 +115,7 @@ public class GoalManager
                     if (type == "Simple")
                     {
 
-                        string name = Unescape(oarts[1]);
+                        string name = Unescape(parts[1]);
                         string desc = Unescape(parts[2]);
                         int pts = int.Parse(parts[3]);
                         bool complete = bool.Parse(parts[4]);
@@ -142,13 +142,13 @@ public class GoalManager
                         string desc = Unescape(parts[2]);
                         int pts = int.Parse(parts[3]);
                         int current = int.Parse(parts[4]);
-                        int target = int.Parse(part[5]);
+                        int target = int.Parse(parts[5]);
                         int bonus = int.Parse(parts[6]);
                         loadedGoals.Add(ChecklistGoal.FromSaved(name, desc, pts, current, target, bonus));
                     }
                     else
                     {
-                        Console.WriteLine($"Unknow goal type in save: {type}");
+                        Console.WriteLine($"Unknown goal type in save: {type}");
                     }
                 }
                 catch (Exception ex)
@@ -160,7 +160,7 @@ public class GoalManager
             _goals = loadedGoals;
             _score = loadedScore;
             _badges = loadedBadges;
-            Console.WriteLine($"Loaded { _goals.Count } goals.Score: {_score}. Badges: {string.Join(",", _badges)}");
+            Console.WriteLine($"Loaded { _goals.Count } goals. Score: {_score}. Badges: ...");
         }
 
         private static string Unescape(string s) => s.Replace("¦", "|");
@@ -168,19 +168,19 @@ public class GoalManager
 
         private void CheckForBadges()
         {
-            var milestone = new Dictionary<int, string>
+            var milestones = new Dictionary<int, string>
             {
-                {1000, "1000-Point Achivier"},
+                {1000, "1000-Point Achiever"},
                 {2500, "Quarter-Master"},
                 {5000, "Legendary Questor"}
             };
 
             foreach (var kv in milestones)
             {
-                if (_score >= kv.key && !_badges.Contains(kv.Value))
+                if (_score >= kv.Key && !_badges.Contains(kv.Value))
                 {
                     _badges.Add(kv.Value);
-                    Console.WriteLine($"Badge earned: {kv.Vaule } (for reaching {kv.Key} points)!");
+                    Console.WriteLine($"Badge earned: {kv.Value } (for reaching {kv.Key} points)!");
                 }
             }
         }
@@ -189,9 +189,8 @@ public class GoalManager
         public static void PrintGoalTypes()
         {
             Console.WriteLine("Types:");
-            Console.WriteLine("1.Simple Goal - Complete once, get points once.")
-            Console.WriteLine("2. Eternal Goal - Repeatable, get points each time.")
-            Console.WriteLine("3. Checklist Goal Finish N times and get a bonus on completion.");
-        }
+            Console.WriteLine("1.Simple Goal - Complete once, get points once.");
+            Console.WriteLine("2. Eternal Goal - Repeatable, get points each time.");
+            Console.WriteLine("3. Checklist Goal - Finish N times and get a bonus on completion.");
 
     }
