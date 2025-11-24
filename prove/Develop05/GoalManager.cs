@@ -156,10 +156,34 @@ public class GoalManager
                     Console.WriteLine($"Failed to parse line: {line} ({ex.Message})");
                 }
             }
-            
+
             _goals = loadedGoals;
             _score = loadedScore;
             _badges = loadedBadges;
             Console.WriteLine($"Loaded { _goals.Count } goals.Score: {_score}. Badges: {string.Join(",", _badges)}");
         }
+
+        private static string Unescape(string s) => s.Replace("¦", "|");
+
+
+        private void CheckForBadges()
+        {
+            var milestone = new Dictionary<int, string>
+            {
+                {1000, "1000-Point Achivier"},
+                {2500, "Quarter-Master"},
+                {5000, "Legendary Questor"}
+            };
+
+            foreach (var kv in milestones)
+            {
+                if (_score >= kv.key && !_badges.Contains(kv.Value))
+                {
+                    _badges.Add(kv.Value);
+                    Console.WriteLine(($Badge earned: {kv.Vaule } (for reaching {kv.Key} points)))
+                }
+            }
+        }
+
+
     }
