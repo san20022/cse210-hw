@@ -14,7 +14,13 @@ class Program
         Video video2 = new Video("title2", "author2", 20);
         videoCollection.Add(video2);
         Video video3 = new Video("title3", "author3", 30);
-        videoCollection.Add
+        videoCollection.Add(video3);
+        Video video4 = new Video("title4", "author4", 40);
+        videoCollection.Add(video4);
+
+        Comment comment1_1 = new Comment("commentator1_1", "This is a great stuff!");
+        video1._comments.Add(comment1_1);
+        Comment comment1_2 = new Comment("commentator1")
 
         
     }
