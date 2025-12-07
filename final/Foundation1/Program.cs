@@ -20,7 +20,11 @@ class Program
 
         Comment comment1_1 = new Comment("commentator1_1", "This is a great stuff!");
         video1._comments.Add(comment1_1);
-        Comment comment1_2 = new Comment("commentator1")
+        Comment comment1_2 = new Comment("commentator1_2", "This is awseome stuff!");
+        video1._comments.Add(comment1_2);
+        Comment comment1_3 = new Comment("commentator1_3", "Who would have thought?!?!?!")
+        video1._comments.Add(comment1_3)
+        
 
         
     }
