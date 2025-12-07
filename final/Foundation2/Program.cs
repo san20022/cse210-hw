@@ -23,5 +23,6 @@ class Program
         orderA.SetProductList(product3, 3);
         Console.Write("Shipping Label:\n");
         Console.Write($"{orderA.GetShippingLabel()}\n\n");
+        Console.Write()
     }
 }
