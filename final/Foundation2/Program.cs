@@ -16,6 +16,12 @@ class Program
         Product product7 = new Product("productG", "G-901STU", 75);
         Product product8 = new Product("productH", "H-234VXY", 85);
         Product product9 = new Product("productI", "I-567ZAB", 100);
-        
+        Order orderA = new Order();
+        orderA.CustomerSetup("Luis S. Rojas","2603 W Evereetwood Dr", "Taylorsville", "UT" "84129", "USA");
+        orderA.SetProductList(product1, 1);
+        orderA.SetProductList(product2, 2);
+        orderA.SetProductList(product3, 3);
+        Console.Write("Shipping Label:\n");
+        Console.Write($"{orderA.GetShippingLabel()}\n\n");
     }
 }
