@@ -23,6 +23,16 @@ class Program
         orderA.SetProductList(product3, 3);
         Console.Write("Shipping Label:\n");
         Console.Write($"{orderA.GetShippingLabel()}\n\n");
-        Console.Write()
+        Console.Write("Packing Label:\n");
+        Console.Write($"{orderA.GetPackingLabel()}\n");
+        Console.Write($"Your total price is ${orderA.GetTotalCost()}.\n\n");
+        Console.Write("*Total price includes shipping.\n");
+        Console.Write("**USA shipping is $5.00, and  outside USA is $35.00.\n\n");
+        Console.Write("<Press Any Keys>");
+        Console.ReadKey();
+        Console.Clear();
+        Order orderB = new Order();
+        orderB.CustomerSetup("Some Canadian's Name", "456 B Street", "Toronto", "Ontario", "M4C 1T1", "Canada");
+        
     }
 }
