@@ -33,6 +33,36 @@ class Program
         Console.Clear();
         Order orderB = new Order();
         orderB.CustomerSetup("Some Canadian's Name", "456 B Street", "Toronto", "Ontario", "M4C 1T1", "Canada");
-        
+        orderB.SetProductList(product1, 1);
+        orderB.SetProductList(product2, 2);
+        orderB.SetProductList(product3, 3);
+        Console.Write("Shipping Label:\n");
+        Console.Write($"{orderB.GetShippingLabel()}\n\n");
+        Console.Write("Packing Label:\n");
+        Console.Write($"{orderB.GetPackingLabel()}\n");
+        Console.Write($"Your total price is ${orderB.GetTotalCost()}.\n\n");
+        Console.Write("*Total price includes shipping.\n");
+        Console.Write("**USA shipping is $5.00, and outside USA is $35.00.\n\n");
+        Console.Write("<Press Any Key>");
+        Console.ReadKey();
+        Console.Clear();
+        Order orderC = new Order();
+        orderC.CustomerSetup("Another Canadian's Name","789 C Street", "Toronto", "Ontario", "M4C 1T3", "Canada");
+        orderC.SetProductList(product1, 4);
+        orderC.SetProductList(product3, 1);
+        orderC.SetProductList(product5, 3);
+        orderC.SetProductList(product7, 1);
+        orderC.SetProductList(product9, 2);
+        orderC.SetProductList(product2, 1);
+        Console.Write("Shipping Label:\n");
+        Console.Write($"{orderC.GetShippingLabel()}\n\n");
+        Console.Write("Packing Label:\n");
+        Console.Write($"{orderC.GetPackingLabel()}\n");
+        Console.Write($"Your total price is ${orderC.GetTotalCost()}.\n\n");
+        Console.Write("*Total price includes shipping.\n");
+        Console.Write("**USA shipping is $5.00, and outside USA is $35.00.\n\n");
+        Console.Write("Press Any Key");
+        Console.ReadKey();
+        Console.Clear();
     }
 }
