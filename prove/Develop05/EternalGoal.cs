@@ -1,4 +1,5 @@
 using System;
+
 public class EternalGoal : Goal
 {
     public EternalGoal(string name, string description, int points)
@@ -8,21 +9,26 @@ public class EternalGoal : Goal
 
     public override int RecordEvent()
     {
-        return PointsPerEvent;
+        return GetPointsPerEvent();
     }
 
-    public override bool IsComplete() => false;
+    public override bool IsComplete()
+    {
+        return false;
+    }
 
     public override string GetDetailsString()
     {
-        return $"[∞] {Name} ({Description}) - {PointsPerEvent} pts each time";
+        return "[∞] " + GetName() + " (" + GetDescription() + ") - " + GetPointsPerEvent() + " pts each time";
     }
 
     public override string ToSaveString()
     {
-
-        return $"Eternal|{Escape(Name)}|{Escape(Description)}|{PointsPerEvent}";
+        return "Eternal|" + Escape(GetName()) + "|" + Escape(GetDescription()) + "|" + GetPointsPerEvent();
     }
 
-    private static string Escape(string s) => s.Replace("|", "￤");
+    private static string Escape(string s)
+    {
+        return s.Replace("|", "￤");
+    }
 }

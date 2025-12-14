@@ -1,4 +1,4 @@
-using System
+using System;
 
 public class ChecklistGoal : Goal
 {
@@ -9,8 +9,11 @@ public class ChecklistGoal : Goal
     public ChecklistGoal(string name, string description, int pointsPerEvent, int targetCount, int bonus)
         : base(name, description, pointsPerEvent)
     {
-        _targetCount = Math.Max(1, targetCount);
-        _bonus = Math.Max(0, bonus);
+        if (targetCount < 1) targetCount = 1;
+        if (bonus < 0) bonus = 0;
+
+        _targetCount = targetCount;
+        _bonus = bonus;
         _currentCount = 0;
     }
 
@@ -23,34 +26,44 @@ public class ChecklistGoal : Goal
         }
 
         _currentCount++;
-        int points = PointsPerEvent;
+        int points = GetPointsPerEvent();
+
         if (_currentCount >= _targetCount)
         {
-
             points += _bonus;
-            Console.WriteLine($"Congratulations! You completed the checklist goal and earned a bonus of {_bonus} points!");
+            Console.WriteLine("Congratulations! You completed the checklist goal and earned a bonus of " + _bonus + " points!");
         }
+
         return points;
     }
 
-    public override bool IsComplete() => _currentCount >= _targetCount;
+    public override bool IsComplete()
+    {
+        return _currentCount >= _targetCount;
+    }
 
     public override string GetDetailsString()
     {
         string status = IsComplete() ? "[X]" : "[ ]";
-        return $"{status} {Name} ({Description}) - Completed {_currentCount}/{_targetCount} - {PointsPerEvent} pts each, { _bonus } bonus at completion";
+        return status + " " + GetName() + " (" + GetDescription() + ") - Completed " + _currentCount + "/" + _targetCount + " - " + GetPointsPerEvent() + " pts each, " + _bonus + " bonus at completion";
     }
 
     public override string ToSaveString()
     {
-        return $"Checklist|{Escape(Name)}|{Escape(Description)}|{PointsPerEvent}|{_currentCount}|{_targetCount}|{_bonus}";
+        return "Checklist|" + Escape(GetName()) + "|" + Escape(GetDescription()) + "|" + GetPointsPerEvent() + "|" + _currentCount + "|" + _targetCount + "|" + _bonus;
     }
+
     public static ChecklistGoal FromSaved(string name, string desc, int points, int current, int target, int bonus)
     {
-        var g = new ChecklistGoal(name, desc, points, target, bonus);
-        g._currentCount = Math.Max(0, Math.Min(current, target));
+        ChecklistGoal g = new ChecklistGoal(name, desc, points, target, bonus);
+        if (current < 0) current = 0;
+        if (current > target) current = target;
+        g._currentCount = current;
         return g;
     }
 
-    private static string Escape(string s) => s.Replace("|", "¦");
+    private static string Escape(string s)
+    {
+        return s.Replace("|", "¦");
+    }
 }

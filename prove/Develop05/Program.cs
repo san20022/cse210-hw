@@ -5,7 +5,7 @@ class Program
     static void Main(string[] args)
     {
         Console.WriteLine("Welcome to Eternal Quest!");
-        var gm = new GoalManager();
+        GoalManager gm = new GoalManager();
         bool quit = false;
 
         while (!quit)
@@ -20,10 +20,11 @@ class Program
             Console.WriteLine("6. Load goals from file");
             Console.WriteLine("7. Demo: Add example goals");
             Console.WriteLine("0. Quit");
-            Console.WriteLine("Choose an option: ");
-            var choice = Console.ReadLine()?.Trim();
+            Console.Write("Choose an option: ");
+            string choice = Console.ReadLine();
+            if (choice == null) choice = "";
 
-            switch (choice)
+            switch (choice.Trim())
             {
                 case "1":
                     CreateGoalUI(gm);
@@ -39,13 +40,15 @@ class Program
                     break;
                 case "5":
                     Console.Write("Enter file name to save (e.g., save.txt): ");
-                    string savePath = Console.ReadLine().Trim();
-                    gm.Save(savedPath);
+                    string savePath = Console.ReadLine();
+                    if (!string.IsNullOrWhiteSpace(savePath))
+                        gm.Save(savePath.Trim());
                     break;
                 case "6":
-                    Console.Write("Enter file name to load (e.g., save.text): ");
-                    string loadPath = Console.ReadLine().Trim();
-                    gm.Load(loadPath);
+                    Console.Write("Enter file name to load (e.g., save.txt): ");
+                    string loadPath = Console.ReadLine();
+                    if (!string.IsNullOrWhiteSpace(loadPath))
+                        gm.Load(loadPath.Trim());
                     break;
                 case "7":
                     AddDemoGoals(gm);
@@ -55,7 +58,7 @@ class Program
                     break;
                 default:
                     Console.WriteLine("Invalid choice.");
-                    break;    
+                    break;
             }
         }
 
@@ -65,44 +68,49 @@ class Program
     static void CreateGoalUI(GoalManager gm)
     {
         GoalManager.PrintGoalTypes();
-        Console.Write("Choose goal type 1-3): ");
-        string t = Console.ReadLine()?.Trim();
-        switch (t)
+        Console.Write("Choose goal type (1-3): ");
+        string t = Console.ReadLine();
+        if (t == null) return;
+
+        switch (t.Trim())
         {
             case "1":
                 Console.Write("Name: ");
-                var nameS = Console.ReadLine();
+                string nameS = Console.ReadLine();
                 Console.Write("Description: ");
-                var descS = Console.ReadLine();
+                string descS = Console.ReadLine();
                 Console.Write("Points (integer): ");
                 int ptsS = ReadIntFromConsole(100);
                 gm.AddGoal(new SimpleGoal(nameS, descS, ptsS));
-                Console.WriteLine("Simple goals created.");
+                Console.WriteLine("Simple goal created.");
                 break;
+
             case "2":
                 Console.Write("Name: ");
-                var nameE = Console.ReadLine();
+                string nameE = Console.ReadLine();
                 Console.Write("Description: ");
-                var descE = Console.ReadLine();
-                Console.Write("Points per event (intteger): ");
+                string descE = Console.ReadLine();
+                Console.Write("Points per event (integer): ");
                 int ptsE = ReadIntFromConsole(10);
                 gm.AddGoal(new EternalGoal(nameE, descE, ptsE));
                 Console.WriteLine("Eternal goal created.");
                 break;
+
             case "3":
                 Console.Write("Name: ");
-                var nameC = Console.ReadLine();
+                string nameC = Console.ReadLine();
                 Console.Write("Description: ");
-                var descC = Console.ReadLine();
+                string descC = Console.ReadLine();
                 Console.Write("Points per event (integer): ");
                 int ptsC = ReadIntFromConsole(10);
-                Console.WriteLine("Target count (how many times to comlete): ");
+                Console.Write("Target count (how many times to complete): ");
                 int target = ReadIntFromConsole(5);
                 Console.Write("Bonus at completion (integer): ");
                 int bonus = ReadIntFromConsole(50);
                 gm.AddGoal(new ChecklistGoal(nameC, descC, ptsC, target, bonus));
                 Console.WriteLine("Checklist goal created.");
                 break;
+
             default:
                 Console.WriteLine("Invalid type.");
                 break;
@@ -112,15 +120,17 @@ class Program
     static void RecordEventUI(GoalManager gm)
     {
         gm.ShowGoals();
-        Console.Write("Enter the goal number you completed (0 to cancel); ");
+        Console.Write("Enter the goal number you completed (0 to cancel): ");
         int sel = ReadIntFromConsole(0);
         if (sel == 0) return;
         gm.RecordEvent(sel);
     }
+
     static int ReadIntFromConsole(int defaultVal)
     {
         string s = Console.ReadLine();
-        if (int.TryParse(s, out int val)) return val;
+        int val;
+        if (int.TryParse(s, out val)) return val;
         return defaultVal;
     }
 
