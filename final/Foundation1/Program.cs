@@ -9,26 +9,26 @@ class Program
 
         List<Video> videoCollection = new List<Video>();
 
-        Video video1 = new Video("Title 1", "Author 1", 10);
-        Video video2 = new Video("Title 2", "Author 2", 20);
-        Video video3 = new Video("Title 3", "Author 3", 30);
-        Video video4 = new Video("Title 4", "Author 4", 40);
+        Video video1 = new Video("A brief overview of BYU-Idaho", "BYU Idaho", 10);
+        Video video2 = new Video("Campus in 2 Minutes | Get to Know BYU-Idaho", "BYU Idaho", 20);
+        Video video3 = new Video("You Belong at BYU-Idaho", "BYU Idaho", 30);
+        Video video4 = new Video("What I Wish I Knew Before Attending | Get to Know BYU-Idaho", "BYU Idaho", 40);
 
-        video1.AddComment(new Comment("User1", "This is great!"));
-        video1.AddComment(new Comment("User2", "Loved it"));
-        video1.AddComment(new Comment("User3", "Amazing"));
+        video1.AddComment(new Comment("Rowan", "This is great!"));
+        video1.AddComment(new Comment("Elliot", "Loved it"));
+        video1.AddComment(new Comment("Millie", "Amazing"));
 
-        video2.AddComment(new Comment("User4", "Not so good"));
-        video2.AddComment(new Comment("User5", "Could be better"));
-        video2.AddComment(new Comment("User6", "I liked it"));
+        video2.AddComment(new Comment("Kayla", "Not so good"));
+        video2.AddComment(new Comment("Luis", "Could be better"));
+        video2.AddComment(new Comment("Patricio", "I liked it"));
 
-        video3.AddComment(new Comment("User7", "WOW"));
-        video3.AddComment(new Comment("User8", "Crazy stuff"));
-        video3.AddComment(new Comment("User9", "Nice"));
+        video3.AddComment(new Comment("Noel", "WOW"));
+        video3.AddComment(new Comment("Spencer", "Crazy stuff"));
+        video3.AddComment(new Comment("Alan", "Nice"));
 
-        video4.AddComment(new Comment("User10", "Waste of time"));
-        video4.AddComment(new Comment("User11", "Awesome"));
-        video4.AddComment(new Comment("User12", "Fantastic"));
+        video4.AddComment(new Comment("Braden", "Waste of time"));
+        video4.AddComment(new Comment("Alex", "Awesome"));
+        video4.AddComment(new Comment("Morgan", "Fantastic"));
 
         videoCollection.Add(video1);
         videoCollection.Add(video2);
