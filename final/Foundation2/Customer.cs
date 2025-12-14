@@ -1,34 +1,28 @@
 using System;
-class Customer 
+
+class Customer
 {
-    private string _customerName = "";
-    private Address _customerAddress;
-    private bool _localUS_Address = false;
-    private string _country = "";
-    public Customer(string customerName)
+    private string _name;
+    private Address _address;
+
+    public Customer(string name, Address address)
     {
-        SetCustomerName(customerName);
+        _name = name;
+        _address = address;
     }
-    public string GetCustomerName()
+
+    public string GetName()
     {
-        return _customerName;
+        return _name;
     }
-    public string GetCustomerAddress()
+
+    public bool LivesInUSA()
     {
-        return _customerAddress.GetAddress();
+        return _address.IsInUSA();
     }
-    public void SetCustomerName(string name)
+
+    public string GetAddress()
     {
-        _customerName = name;
-    }
-    public void SetAddress(string streetAddress, string city, string state_Province, string zipCode, string country)
-    {
-        _customerAddress = new Address(streetAddress, city, state_Province, zipCode, country);
-        _country = country;
-    }
-    public bool IsLocalUSAddress()
-    {
-        if (_country == "USA") { return true; }
-        else return false;
+        return _address.GetFullAddress();
     }
 }

@@ -1,53 +1,60 @@
 using System;
 using System.Collections.Generic;
-class Order 
+
+class Order
 {
+    private List<Product> _products;
     private Customer _customer;
-    private List<Product> _productList = new List<Product>();
-    private double shippingCostOutsideUSA = 35;
-    private double shippingCostInsideUSA = 5;
+
+    private const double ShippingUSA = 5;
+    private const double ShippingInternational = 35;
+
+    public Order(Customer customer)
+    {
+        _customer = customer;
+        _products = new List<Product>();
+    }
+
+    public void AddProduct(Product product)
+    {
+        _products.Add(product);
+    }
+
     public double GetTotalCost()
     {
-        double totalCost = 0;
-        if (_customer.IsLocalUSAddress())
+        double total = 0;
+
+        foreach (Product product in _products)
         {
-            totalCost += shippingCostInsideUSA;
+            total += product.GetTotalCost();
+        }
+
+        if (_customer.LivesInUSA())
+        {
+            total += ShippingUSA;
         }
         else
         {
-            totalCost += shippingCostOutsideUSA;
+            total += ShippingInternational;
         }
-        foreach (Product lineItemInOrder in _productList)
-        {
-            totalCost += lineItemInOrder.GetProductTotalCost();
-        }
-        return totalCost;
+
+        return total;
     }
-    public void CustomerSetup(string name, string streetAddress, string city, string state_Province, string zipCode, string country)
-    {
-        _customer = new Customer(name);
-        _customer.SetAddress(streetAddress, city, state_Province, zipCode, country);
-    }
-    public string GetCustomer()
-    {
-        return _customer.GetCustomerName();
-    }
-    public void SetProductList(Product itemAdding, int quantity)
-    {
-        itemAdding.SetQuantity(quantity);
-        _productList.Add(itemAdding);
-    }
+
     public string GetPackingLabel()
     {
-        string result = "";
-        foreach (Product lineItem in _productList)
+        string label = "";
+
+        foreach (Product product in _products)
         {
-            result += $"Product Name: {lineItem.GetName()} - Product ID: {lineItem.GetID()} Qty: {lineItem.GetQuantity()}\n";
+            label += $"{product.GetName()} (ID: {product.GetProductID()}) Qty: {product.GetQuantity()}\n";
         }
-        return result;
+
+        return label;
     }
+
     public string GetShippingLabel()
     {
-        return $"{_customer.GetCustomerName()}\n{_customer.GetCustomerAddress()}";
+        return $"{_customer.GetName()}\n{_customer.GetAddress()}";
     }
 }
