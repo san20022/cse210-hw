@@ -1,22 +1,18 @@
 using System;
-public class Swimming : Activity
+
+class Swimming : Activity
 {
-    private int _laps = 0;
-    public Swimming(string date, int length, string activity, int laps) : base(date, length, activity)
-    {
-        SetLaps(laps);
-    }
-    public void SetLaps(int laps)
+    private int _laps;
+
+    public Swimming(string date, int length, int laps)
+        : base(date, length)
     {
         _laps = laps;
     }
-    public int GetLaps()
+
+    public override double GetDistance()
     {
-        return _laps;
-    }
-    public override double GetCalculatedDistance() //swimming laps * 50 / 1000 * 0.62
-    {
-        //1 lap is 50 meters, which is 0.0310686 miles
-        return GetLaps() * 0.0310686
+        // 1 lap = 50 meters = 0.031 miles
+        return _laps * 0.031;
     }
 }

@@ -1,21 +1,22 @@
 using System;
-public class Cycling : Activity
+
+class Cycling : Activity
 {
-    private double _speed = 0;
-    public Cycling(string date, int length, string activity, double speed) : base(date, length, activity)
-    {
-        SetSpeed(speed);
-    }
-    public void SetSpeed(double speed)
+    private double _speed;
+
+    public Cycling(string date, int length, double speed)
+        : base(date, length)
     {
         _speed = speed;
     }
-    public double GetSpeed()
+
+    public override double GetSpeed()
     {
         return _speed;
     }
-    public override double GetCalculatedSpeed() //distance = speed x time
+
+    public override double GetDistance()
     {
-        return GetSpeed();
+        return (_speed * GetLength()) / 60;
     }
 }
