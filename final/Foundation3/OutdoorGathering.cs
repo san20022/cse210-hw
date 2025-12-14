@@ -1,15 +1,28 @@
 using System;
-public class OutdoorGatherings : Event
+
+class OutdoorGathering : Event
 {
-    private string _weatherStatement = "";
-    public OutdoorGatherings(string eventTitle, string eventDesc, string eventDate, string eventTime, string streetAddress, string city, string state_Province, string zipCode, string country, string eventType, string details) : base(eventTitle, eventDesc, eventDate, eventTime, streetAddress, city, state_Province, zipCode, Country);
+    private string _weatherForecast;
+
+    public OutdoorGathering(
+        string title,
+        string description,
+        string date,
+        string time,
+        Address address,
+        string weatherForecast
+    ) : base(title, description, date, time, address)
     {
-        SetEventType(eventType);
-        SetWeatherStatement(details);
-        SetFullDetails(_weatherStatement);
+        _weatherForecast = weatherForecast;
     }
-    public void SetWeatherStatement(string weatherStatement)
+
+    public override string GetFullDetails()
     {
-        _weatherStatement = weatherStatement;
+        return $"{GetStandardDetails()}\nEvent Type: Outdoor Gathering\nWeather: {_weatherForecast}";
+    }
+
+    public override string GetShortDescription()
+    {
+        return $"Outdoor Gathering - {_weatherForecast}";
     }
 }

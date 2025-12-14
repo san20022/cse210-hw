@@ -1,20 +1,28 @@
 using System;
-public class Reception : Event
+
+class Reception : Event
 {
-    private string _rsvp = "";
-    public Reception(string eventTitle, string eventDesc, string eventDate, string eventTime, string streetAddress, string city, string state_Province, string zipCode, string country, string details, string evenType, string resvp) : base(eventTitle, eventDesc, eventDate, eventTime, streetAddress, city, state_Province, zipCode, country)
+    private string _rsvpEmail;
+
+    public Reception(
+        string title,
+        string description,
+        string date,
+        string time,
+        Address address,
+        string rsvpEmail
+    ) : base(title, description, date, time, address)
     {
-        SetEventType(evenType);
-        SetRSVP(rsvp);
-        string detailString = SetDetailsString(details, rsvp);
-        SetFullDetails(detailString);
+        _rsvpEmail = rsvpEmail;
     }
-    public void SetRSVP(string rsvp)
+
+    public override string GetFullDetails()
     {
-        _rsvp = resvp;
+        return $"{GetStandardDetails()}\nEvent Type: Reception\nRSVP Email: {_rsvpEmail}";
     }
-    public string SetDetailsString(string details, string rsvp)
+
+    public override string GetShortDescription()
     {
-        _return $"\n{details}\n{rsvp}.";
+        return $"Reception - {_rsvpEmail}";
     }
 }

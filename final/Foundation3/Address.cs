@@ -1,26 +1,24 @@
 using System;
+
 class Address
 {
-    private string _streetAddress = "Street Address";
-    private string _city = "City";
-    private string _stateProvince = "State";
-    private string _zipCode = "Zip";
-    private string _country = "USA";
-    public Address() {}
-    public Address(string streetAddress, string city, string state_Province, string zipCode, string country)
+    private string _street;
+    private string _city;
+    private string _state;
+    private string _zip;
+    private string _country;
+
+    public Address(string street, string city, string state, string zip, string country)
     {
-        setAddress(streetAddress, city, state_Province, zipCode, country);
-    }
-    public void SetAddress(string streetAddress, string city, string state_Province, string zipCode, string country)
-    {
-        _streetAddress = streetAddress;
+        _street = street;
         _city = city;
-        _stateProvince = state_Province;
-        _zipCode = zipCode;
+        _state = state;
+        _zip = zip;
         _country = country;
     }
-    public string GetAddress()
+
+    public string GetFullAddress()
     {
-        return $"{_streetAddress}\n{_city}, {_stateProvince} {_zipCode}\n{_country}";
+        return $"{_street}\n{_city}, {_state} {_zip}\n{_country}";
     }
 }

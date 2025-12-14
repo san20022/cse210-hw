@@ -1,20 +1,31 @@
 using System;
-public class Lecture : Event
+
+class Lecture : Event
 {
-    private int _capacty = 0;
-    public Lecture(string eventTitle, string eventDesc, string eventDate, string eventTime, string streetAddress, string city, string state_Province, string zipCode, string country, string details, int capacty) : base(eventTitle, eventDesc, eventDate, eventTime, streetAddress, city, state_Province, zipCode, country)
+    private string _speaker;
+    private int _capacity;
+
+    public Lecture(
+        string title,
+        string description,
+        string date,
+        string time,
+        Address address,
+        string speaker,
+        int capacity
+    ) : base(title, description, date, time, address)
     {
-        SetEventType("Lecture");
-        SetCapacity(capacity);
-        string detailString = SetDetailsString(details, capacity);
-        SetFullDetails(detailString);
-    }
-    public void SetCapacity(int capacity)
-    {
+        _speaker = speaker;
         _capacity = capacity;
     }
-    public string SetDetailsString(string details, int capacity)
+
+    public override string GetFullDetails()
     {
-        return $"\nPresenting guest speaker(s) {details}, with the capacity of the event being {capacity} people.";
+        return $"{GetStandardDetails()}\nEvent Type: Lecture\nSpeaker: {_speaker}\nCapacity: {_capacity}";
+    }
+
+    public override string GetShortDescription()
+    {
+        return $"Lecture - {_speaker} - {_capacity} seats";
     }
 }
